@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { BACKEND_URL } from "../constants";
 
 export default function Content() {
   const [description, setDescription] = useState("");
@@ -19,7 +20,7 @@ export default function Content() {
     setResult("");
     // later you can send this to your backend
     try {
-      const response = await fetch("http://localhost:5001/api/v1/get-content", {
+      const response = await fetch(`${BACKEND_URL}/get-content`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

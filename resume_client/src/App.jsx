@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNav } from "./context";
 import Navbar from "./components/Navbar";
 import Score from "./components/Score";
@@ -6,7 +7,19 @@ import { BarChart3, FileText } from "lucide-react";
 
 const App = () => {
   const { selectedPage, setSelectedPage } = useNav();
+  useEffect(() => {
+    // Wake up the backend when the app first loads
+    const wakeServer = async () => {
+      try {
+        await fetch("https://resumeit-0xaw.onrender.com", { method: "GET" });
+        console.log("Backend is live now");
+      } catch (error) {
+        console.error("Error waking up backend:", error);
+      }
+    };
 
+    wakeServer();
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />

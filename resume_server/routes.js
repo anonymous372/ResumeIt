@@ -4,9 +4,17 @@ import { rateMyResume, getBulletPoints } from "./gemini.js";
 
 const router = express.Router();
 
+import fs from "fs";
+
+// Ensure uploads directory exists for multer
+const uploadDir = "uploads/";
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     // Give it a timestamp to avoid collisions

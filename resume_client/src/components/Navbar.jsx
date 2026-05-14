@@ -4,10 +4,9 @@ export default function Navbar() {
   const { selectedPage, setSelectedPage } = useNav();
 
   const linkClasses = (page) =>
-    `px-4 py-2 rounded-full font-medium transition ${
-      selectedPage === page
-        ? "bg-indigo-600 text-white shadow-md"
-        : "text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
+    `px-4 py-2 rounded-full font-medium transition ${selectedPage === page
+      ? "bg-indigo-600 text-white shadow-md"
+      : "text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
     }`;
 
   return (

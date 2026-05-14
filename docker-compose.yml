@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./resume_server
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./resume_server/.env
+    environment:
+      - PORT=5001
+    volumes:
+      - ./resume_server:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./resume_client
+    ports:
+      - "5173:5173"
+    environment:
+      # If your frontend needs to make requests to the backend, it usually connects directly to localhost from the browser, but you can pass ENV variables here if Vite requires them.
+      - VITE_API_URL=http://localhost:5001/api/v1
+    volumes:
+      - ./resume_client:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    restart: unless-stopped

@@ -1,4 +1,2 @@
-// For Production
-export const BACKEND_URL = "https://resumeit-0xaw.onrender.com/api/v1";
-// For Dev
-// export const BACKEND_URL = "http://localhost:5001/api/v1";
+// For Production / Dev dynamically
+export const BACKEND_URL = import.meta.env.VITE_API_URL || "https://resumeit-0xaw.onrender.com/api/v1";
